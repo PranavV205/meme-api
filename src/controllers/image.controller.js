@@ -1,4 +1,5 @@
 import { Image } from "../models/image.model.js"
+import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
 const getRandomImage = async (req, res) => {
     try {
@@ -12,17 +13,24 @@ const getRandomImage = async (req, res) => {
 
         res.json(randomImage)
     } catch (error) {
-        console.log(error)
         return res.status(500).json({"message": "Error fetching image"})
     }
 }
 
 const uploadImage = async (req, res) => {
-    const {imageFile, name} = req.body
+    const {name} = req.body
+
+    const imageFileLocalPath = req.file.path
+    if (!imageFileLocalPath) res.json({"msg": "no file found"})
+    console.log(imageFileLocalPath)
+
+    const imageFile = await uploadOnCloudinary(imageFileLocalPath)
+    console.log(imageFile)
+    if (!imageFile) res.json({"msg": "no file :("})
 
     const image = await Image.create({
-        "imageFile": imageFile,
-        "name": name
+        imageFile: imageFile.url,
+        name,
     })
 
     return res.status(201).json({"message": "Image uploaded successfully"})

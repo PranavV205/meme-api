@@ -6,7 +6,7 @@ import imageRouter from "./routes/image.router.js"
 const app = express()
 
 const corsOptions = {
-    origin: 'https://pranav-memehub.netlify.app/',
+    origin: 'https://memehub-p.netlify.app/',
     methods: ['GET', 'POST'],
 }
 

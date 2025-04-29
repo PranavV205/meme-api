@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { ImagesModule } from './images/images.module';
+import { LandingModule } from './landing/landing.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { ImagesModule } from './images/images.module';
     MongooseModule.forRoot(`${process.env.MONGODB_URI}/landing`, {
       connectionName: 'landing',
     }),
-    ImagesModule
+    ImagesModule,
+    LandingModule
   ],
 })
 export class AppModule { }

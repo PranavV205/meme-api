@@ -9,7 +9,8 @@ export class ImagesController {
     constructor(private readonly imagesService: ImagesService) { }
 
     @Get('gimme')
-    async findAll(): Promise<Image[]> {
-        return this.imagesService.findAll();
+    async getRandomImage(): Promise<Image | null> {
+        return this.imagesService.getRandomImage();
     }
+
 }
